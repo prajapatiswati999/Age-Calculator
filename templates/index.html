@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <!-- Include Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: left;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="date"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .result {
+            padding: 10px;
+            background-color: #e7f1ff;
+            border-left: 5px solid #007bff;
+            margin-top: 20px;
+            border-radius: 4px;
+            text-align: left;
+            animation: fadeInUp 0.5s ease-in-out;
+        }
+        .result p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        // Function to set default value of target_date to today's date
+        function setDefaultDate() {
+            const targetDateInput = document.getElementById('target_date');
+            if (!targetDateInput.value) { // Only set if no value is already present
+                const today = new Date().toISOString().split('T')[0];
+                targetDateInput.value = today;
+            }
+        }
+    </script>
+</head>
+<body onload="setDefaultDate()">
+    <div class="container animate__animated animate__fadeIn">
+        <h1>Age Calculator</h1>
+        <form action="/" method="POST">
+            <label for="dob">Enter Date of Birth:</label>
+            <input type="date" id="dob" name="dob" value="{{ request.form.get('dob', '') }}" required>
+
+            <label for="target_date">Enter the Target Date:</label>
+            <input type="date" id="target_date" name="target_date" value="{{ request.form.get('target_date', '') }}">
+
+            <button type="submit">Calculate Age</button>
+        </form>
+        {% if age_details %}
+        <div class="result animate__animated animate__fadeInUp">
+            <h2>Age:</h2>
+            <p>{{ age_details.years }} years {{ age_details.months }} months {{ age_details.days }} days</p>
+            <p>or {{ age_details.total_months }} months {{ age_details.days }} days</p>
+            <p>or {{ age_details.total_weeks }} weeks {{ age_details.days % 7 }} days</p>
+            <p>or {{ age_details.total_days }} days</p>
+            <p>or {{ age_details.total_hours }} hours</p>
+            <p>or {{ age_details.total_minutes }} minutes</p>
+            <p>or {{ age_details.total_seconds }} seconds</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
