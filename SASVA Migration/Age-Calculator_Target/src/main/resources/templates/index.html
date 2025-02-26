@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Age Calculator</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> 
+    <link rel="stylesheet" href="/styles/style.css"> 
+    <script src="/scripts/main.js"></script> 
+</head> 
+<body onload="setDefaultDate()"> 
+    <div class="container animate__animated animate__fadeIn"> 
+        <h1>Age Calculator</h1> 
+        <form action="/calculate" method="POST"> 
+            <label for="dob">Enter Date of Birth:</label> 
+            <input type="date" id="dob" name="dob" value="${dob}" required> 
+            <label for="target_date">Enter the Target Date:</label> 
+            <input type="date" id="target_date" name="target_date" value="${targetDate}"> 
+            <button type="submit">Calculate Age</button> 
+        </form> 
+        <div th:if="${ageDetails}" class="result animate__animated animate__fadeInUp"> 
+            <h2>Age:</h2> 
+            <p th:text="${ageDetails.years} + ' years ' + ${ageDetails.months} + ' months ' + ${ageDetails.days} + ' days'"></p> 
+            <p th:text="'or ' + ${ageDetails.totalMonths} + ' months ' + ${ageDetails.days} + ' days'"></p> 
+            <p th:text="'or ' + ${ageDetails.totalWeeks} + ' weeks ' + ${ageDetails.remainingDays} + ' days'"></p> 
+            <p th:text="'or ' + ${ageDetails.totalDays} + ' days'"></p> 
+            <p th:text="'or ' + ${ageDetails.totalHours} + ' hours'"></p> 
+            <p th:text="'or ' + ${ageDetails.totalMinutes} + ' minutes'"></p> 
+            <p th:text="'or ' + ${ageDetails.totalSeconds} + ' seconds'"></p> 
+        </div> 
+        <div th:if="${errorMessage}" class="error animate__animated animate__fadeInUp"> 
+            <p th:text="${errorMessage}"></p> 
+        </div> 
+    </div> 
+</body> 
+</html>

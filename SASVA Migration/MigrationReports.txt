@@ -1,0 +1,24 @@
+
+            ===========================================
+                    Migration Report
+            ===========================================
+            Target Folder      : C:\Users\swati_prajapati\Documents\sasva migration\Age-Calculator Migration\Age-Calculator_Target
+            Number of Files    : 5
+            Target Folder Size : 8640 bytes
+            Time Taken         : 24 minutes and 53 seconds
+            -------------------------------------------
+            Files in Target Folder:
+
+    - File Path: AgeCalculator.java
+      Size: 1879 bytes
+    - File Path: AgeCalculatorApp.java
+      Size: 1040 bytes
+    - File Path: AgeCalculatorController.java
+      Size: 2926 bytes
+    - File Path: AgeDetails.java
+      Size: 1539 bytes
+    - File Path: AgeCalculatorView.fxml
+      Size: 1256 bytes
+
+            -------------------------------------------
+            
